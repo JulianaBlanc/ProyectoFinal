@@ -1,0 +1,23 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoDinamico%}
+<!-- Masthead-->
+<header class="masthead">
+    <div class="container position-relative">
+        <div class="row justify-content-center">
+            <div class="col-xl-20">
+                <div class="text-center text-white">
+                    <!-- Page heading-->
+                    <h1 class="mb-5">Listado de clientes mayoristas</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<p> 
+    <li> {{mayorista.nombre}} - {{mayorista.apellido}} - {{mayorista.email}} - {{mayorista.telefono}} </li>
+
+</p>
+        
+{% endblock contenidoDinamico%}
