@@ -1,0 +1,1 @@
+Esto es una plataforma que visualiza una fabrica de zapatos. El objetivo sera mostrar los zapatos 

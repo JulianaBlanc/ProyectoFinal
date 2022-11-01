@@ -37,7 +37,7 @@ def crear_empleado (request, nombre, apellido, legajo):
     empleado.save()
 
 def crear_mayorista(request, nombre, apellido, email, telefono):
-    mayorista = Mayorista (nombre=nombre, apellido=apellido, email=email, telefono=telefono)
+    mayorista = Mayorista(nombre=nombre, apellido=apellido, email=email, telefono=telefono)
     mayorista.save()
     return render (request, "listamayorista.html")
     
@@ -70,3 +70,12 @@ def suscriptores(request):
     else:
         form_prospecto = FormProspecto()
         return render (request, "crearsuscriptor.html", {"form_prospecto": form_prospecto})
+
+def buscar_zapato(request):
+    return render (request, "buscarzapato.html")
+
+def buscar(request):
+    modelo_buscado = request.GET ['modelo']
+    zapato = Zapato.objects.get(nombre=modelo_buscado)
+    print(zapato.material)
+    return render (request, "busquedas_modelos.html", {'zapato': zapato, 'nombre': modelo_buscado})
