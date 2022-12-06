@@ -6,16 +6,20 @@
 <header class="masthead">
     <div class="container position-relative">
         <div class="row justify-content-center">
-            <div class="col-xl-6">
+            <div class="col-xl-20">
                 <div class="text-center text-white">
                     <!-- Page heading-->
-                    <h1 class="mb-5">Bienvenidos a la fabrica de calzado</h1>
+                    <h1 class="mb-5">Ingrese sus datos para iniciar sesión</h1>
                 </div>
             </div>
         </div>
     </div>
 </header>
-<h3> {{mensaje}} </h3>
-<a class="btn btn-primary" href= "{% url 'login' %}" >Intentarlo nuevamente</a>
-<img src="{{url}} alt='avatar">    
+<form action="{% url 'login' %}" method="POST"> {% csrf_token %}
+    {{form_login.as_p}}
+    <input type="submit" value="Ingresar"/>
+</form>
+<br>
+<a href= "{% url 'registrar' %}" >Crear usuario</a>
+        
 {% endblock contenidoDinamico%}

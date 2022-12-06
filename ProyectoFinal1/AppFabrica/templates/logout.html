@@ -6,16 +6,14 @@
 <header class="masthead">
     <div class="container position-relative">
         <div class="row justify-content-center">
-            <div class="col-xl-6">
+            <div class="col-xl-20">
                 <div class="text-center text-white">
                     <!-- Page heading-->
-                    <h1 class="mb-5">Bienvenidos a la fabrica de calzado</h1>
+                    <h1 class="mb-5">Ha cerrado sesión , esperamos que vuelva pronto :)</h1>
+                    <a class="btn btn-primary" href= "{% url 'inicio' %}" >Ir a la página principal</a>
                 </div>
             </div>
         </div>
     </div>
-</header>
-<h3> {{mensaje}} </h3>
-<a class="btn btn-primary" href= "{% url 'login' %}" >Intentarlo nuevamente</a>
-<img src="{{url}} alt='avatar">    
+</header>       
 {% endblock contenidoDinamico%}
