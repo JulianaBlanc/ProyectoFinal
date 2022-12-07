@@ -16,10 +16,10 @@ class ZapatoFormulario(forms.Form):
     talle = forms.IntegerField()
     stock = forms.IntegerField()
     precio = forms.FloatField()
+    foto = forms.ImageField()
 
 class FormProspecto(forms.Form):
     email = forms.EmailField()
-
 
 class UserRegisterForm(UserCreationForm):
     class Meta:

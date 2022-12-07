@@ -27,7 +27,7 @@
                 <a class="btn btn-primary" href= "{% url 'crearzapato' %}" >Crear Calzado</a>
                 <a class="btn btn-primary" href= "{% url 'form_mayorista' %}" >Compra Mayorista</a>
                 {% if user.is_authenticated %}
-                    <p> Bienvenido {{user.username}} </p>
+                    <p> Bienvenid@ {{user.username}} </p>
                     <a href= "{% url 'editar_usuario' %}" >Editar Usuario</a>
                     <a class="btn btn-primary" href= "{% url 'logout' %}" >Logout</a>
                 {% else %}
