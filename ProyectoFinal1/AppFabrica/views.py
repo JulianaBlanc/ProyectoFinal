@@ -10,8 +10,13 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def inicio (request):
-    avatar = avatar.objects.get(user=request.user)
-    return render (request, "inicio.html", {'url': avatar.imagen.url})
+    avatar = Avatar.objects.get(user=request.user)
+    return render(request, "inicio.html", {'url': avatar.imagen.url})
+
+
+# def avatarview (request):
+#     avatar = Avatar.objects.get(user=request.user)
+#     return render(request, "inicio.html", {'url': avatar.imagen.url})
 
 def crear_zapato (request):
     if request.method == 'POST':

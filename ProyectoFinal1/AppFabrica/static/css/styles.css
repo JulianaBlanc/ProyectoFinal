@@ -10,6 +10,8 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+
+ 
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -95,6 +97,13 @@ hr {
   background-color: currentColor;
   border: 0;
   opacity: 0.25;
+}
+
+.avatarImage {
+  vertical-align: middle;
+  width: 40px;
+  height: 40px;
+  border-radius: 40%;
 }
 
 hr:not([size]) {
@@ -1787,6 +1796,7 @@ progress {
     flex: 0 0 auto;
     width: auto;
   }
+
 
   .col-xxl-1 {
     flex: 0 0 auto;

@@ -33,11 +33,12 @@ class Mayorista (models.Model):
 class Prospecto (models.Model):
     email = models.EmailField(default=None)
     def __str__(self):
-        return f' {self.email}'
+        return f'{self.email}'
 
 class Avatar (models.Model):
-    user= models.ForeignKey(User, on_delete=models.CASCADE)
-    imagen= models.ImageField(upload_to='avatares', null=True, blank=True)
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to='avatares', null=True, blank=True)
+    def __str__(self):
+        return f"{self.user} - {self.imagen}"
 
 
