@@ -12,6 +12,7 @@ class Zapato (models.Model):
     talle = models.IntegerField(default=None)
     stock = models.IntegerField(default=None)
     precio = models.FloatField(default=None)
+    foto = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def __str__(self):
         return f' {self.nombre} - {self.material} - {self.color} - {self.talle} - {self.stock} - {self.precio}'

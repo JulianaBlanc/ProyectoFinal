@@ -13,11 +13,6 @@ def inicio (request):
     avatar = Avatar.objects.get(user=request.user)
     return render(request, "inicio.html", {'url': avatar.imagen.url})
 
-
-# def avatarview (request):
-#     avatar = Avatar.objects.get(user=request.user)
-#     return render(request, "inicio.html", {'url': avatar.imagen.url})
-
 def crear_zapato (request):
     if request.method == 'POST':
         form_zapato = ZapatoFormulario(request.POST)
@@ -29,7 +24,8 @@ def crear_zapato (request):
                 color=data['color'], 
                 talle=data['talle'],
                 stock=data['stock'],
-                precio=data['precio']
+                precio=data['precio'],
+                foto=data['foto']
             )
             zapato.save()
             return HttpResponseRedirect ('/AppFabrica/zapatos')

@@ -15,7 +15,7 @@
         </div>
     </div>
 </header>
-<form action="{% url 'crearzapato' %}" method="POST"> {% csrf_token %}
+<form action="{% url 'crearzapato' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
  
     {{form_zapato.as_p}}
 
