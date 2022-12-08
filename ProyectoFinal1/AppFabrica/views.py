@@ -10,13 +10,19 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def inicio (request):
-    avatar = Avatar.objects.get(user=request.user)
-    return render(request, "inicio.html", {'url': avatar.imagen.url})
+    try:
+        avatar = Avatar.objects.get(user=request.user)
+        return render(request, "inicio.html", {'url': avatar.imagen.url})
+    except:
+        return render(request, "inicio.html")
+
+
 
 def crear_zapato (request):
     if request.method == 'POST':
         form_zapato = ZapatoFormulario(request.POST)
         if form_zapato.is_valid():
+            print('error1')
             data=form_zapato.cleaned_data
             zapato = Zapato (
                 nombre=data['nombre'], 
@@ -27,6 +33,7 @@ def crear_zapato (request):
                 precio=data['precio'],
                 foto=data['foto']
             )
+            print('error1')
             zapato.save()
             return HttpResponseRedirect ('/AppFabrica/zapatos')
     else:
@@ -35,19 +42,20 @@ def crear_zapato (request):
 
 def lista_zapatos (request):
     zapatos = Zapato.objects.all()
-    return render (request, "editazapato.html", {"zapatos": zapatos})
+    return render (request, "listazapatos.html", {"zapatos": zapatos})
 
 def eliminar_zapato (request, id):
     if request.method == 'POST':
         zapato = Zapato.objects.get(id=id)
         zapato.delete()
         zapatos = Zapato.objects.all()
-        return render (request, "editazapato.html", {"zapatos":zapatos})
+        return render (request, "listazapatos.html", {"zapatos":zapatos})
 
 def editar_zapato (request, id):
     zapato = Zapato.objects.get(id=id)
     if request.method == 'POST':
-        form_zapato = ZapatoFormulario(request.POST)
+        form_zapato = ZapatoFormulario(request.POST, files=request.FILES)
+        print('hola1')
         if form_zapato.is_valid():
             data=form_zapato.cleaned_data
             zapato.nombre=data['nombre']
@@ -56,7 +64,9 @@ def editar_zapato (request, id):
             zapato.talle=data['talle']
             zapato.stock=data['stock']
             zapato.precio=data['precio']
+            zapato.foto=data['foto']
             zapato.save()
+        print(form_zapato.errors)
         return HttpResponseRedirect('/AppFabrica/zapatos')
     else:
         form_zapato = ZapatoFormulario (initial={
@@ -66,8 +76,9 @@ def editar_zapato (request, id):
             "talle":zapato.talle,
             "stock":zapato.stock,
             "precio":zapato.precio,
+            "foto":zapato.foto
         })
-    return render (request, "editarcalzado.html", {"form_zapato":form_zapato, "id":id })
+    return render (request, "editarcalzado.html", {"form_zapato":form_zapato, "id":id , "url":zapato.foto.url})
 
 
 def crear_empleado (request, nombre, apellido, legajo):

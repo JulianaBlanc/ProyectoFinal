@@ -1,4 +1,5 @@
 from django import forms
+from .models import Zapato
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 
@@ -9,14 +10,19 @@ class MayoristaFormulario(forms.Form):
     email = forms.EmailField()
     telefono = forms.IntegerField()
 
-class ZapatoFormulario(forms.Form):
-    nombre = forms.CharField(max_length=50)
-    material = forms.CharField(max_length=50)
-    color = forms.CharField(max_length=50)
-    talle = forms.IntegerField()
-    stock = forms.IntegerField()
-    precio = forms.FloatField()
-    foto = forms.ImageField()
+# class ZapatoFormulario(forms.Form):
+#     nombre = forms.CharField(max_length=50)
+#     material = forms.CharField(max_length=50)
+#     color = forms.CharField(max_length=50)
+#     talle = forms.IntegerField()
+#     stock = forms.IntegerField()
+#     precio = forms.FloatField()
+#     foto = forms.ImageField()
+
+class ZapatoFormulario(forms.ModelForm):
+    class Meta:
+        model= Zapato
+        fields=('nombre','material','color', 'talle', 'stock', 'precio', 'foto')
 
 class FormProspecto(forms.Form):
     email = forms.EmailField()
