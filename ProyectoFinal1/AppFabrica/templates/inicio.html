@@ -16,6 +16,8 @@
     </div>
 </header>
 <h3> {{mensaje}} </h3>
-<img src="{{url}}" alt="avatar" class="avatar">
+{% if user.is_authenticated %}
+<img src="{{url}}" alt="avatar">
+{% endif %}
 <a class="btn btn-primary" href= "{% url 'login' %}" >Intentarlo nuevamente</a>
 {% endblock contenidoDinamico%}

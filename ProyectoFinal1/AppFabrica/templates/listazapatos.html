@@ -17,8 +17,10 @@
 </header>
 <p> 
     {% for zapato in zapatos%}
+    {% if user.is_authenticated %}
     <li> 
-        Nombre: {{zapato.nombre}} - Material: {{zapato.material}} - Color: {{zapato.color}} - Talle: {{zapato.talle}} - Stock: {{zapato.stock}} - Precio: {{zapato.precio}} 
+        <img src="{{zapato.foto.url}}" alt="foto_producto"> 
+         Nombre: {{zapato.nombre}} - Material: {{zapato.material}} - Color: {{zapato.color}} - Talle: {{zapato.talle}} - Stock: {{zapato.stock}} - Precio: {{zapato.precio}} 
     </li>
     <div>
         <form action="{% url 'eliminar_zapato' zapato.id %}" method="POST"> {% csrf_token %}
@@ -28,6 +30,16 @@
             <a href= "{% url 'editar_zapato' zapato.id %}"> Editar</a>
         </button>
     </div>
+    {% else %}
+    <li> 
+        Nombre: {{zapato.nombre}} - Precio: {{zapato.precio}} 
+    </li>
+    <div>
+        <form action="{% url 'ver_zapato' zapato.id%}" method="POST"> {% csrf_token %}
+            <button type="submit"> Ver más </button>
+        </form>
+    </div>
+    {% endif %}
     {% endfor %}
 
 </p>
