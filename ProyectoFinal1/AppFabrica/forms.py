@@ -33,7 +33,6 @@ class UserRegisterForm(UserCreationForm):
         fields = ['username', 'email', 'first_name', 'last_name']
 
 class UserEditForm(UserChangeForm):
-
     password = forms.CharField(
         help_text="",
         widget=forms.HiddenInput(), required=False
@@ -43,7 +42,6 @@ class UserEditForm(UserChangeForm):
     password2 = forms.CharField(label="Repetir Contraseña", widget=forms.PasswordInput)
 
     class Meta:
-
         model = User
         fields = ['email', 'first_name', 'last_name', 'password1', 'password2']
 
@@ -54,5 +52,5 @@ class UserEditForm(UserChangeForm):
 
         password2 = self.cleaned_data["password2"]
         if password2 != self.cleaned_data["password1"]:
-            raise forms.ValidationError("Las contraseñas no coinciden!")
+            raise forms.ValidationError("Las contraseñas no coinciden")
         return password2

@@ -59,7 +59,6 @@ def editar_zapato (request, id):
     zapato = Zapato.objects.get(id=id)
     if request.method == 'POST':
         form_zapato = ZapatoFormulario(request.POST, files=request.FILES)
-        print('hola1')
         if form_zapato.is_valid():
             data=form_zapato.cleaned_data
             zapato.nombre=data['nombre']
@@ -70,7 +69,6 @@ def editar_zapato (request, id):
             zapato.precio=data['precio']
             zapato.foto=data['foto']
             zapato.save()
-        print(form_zapato.errors)
         return HttpResponseRedirect('/AppFabrica/zapatos')
     else:
         form_zapato = ZapatoFormulario (initial={
