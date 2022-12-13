@@ -18,6 +18,9 @@ def inicio (request):
     except:
         return render(request, "inicio.html")
 
+def sobre_mi (request):
+    return render(request, "sobre_mi.html")
+
 
 def crear_zapato (request):
     if request.method == 'POST':
@@ -67,7 +70,9 @@ def editar_zapato (request, id):
             zapato.talle=data['talle']
             zapato.stock=data['stock']
             zapato.precio=data['precio']
-            zapato.foto=data['foto']
+            if data['foto'] is not None:
+                zapato.foto=data['foto']
+            print("data['foto'] ", data['foto'])
             zapato.save()
         return HttpResponseRedirect('/AppFabrica/zapatos')
     else:
@@ -135,7 +140,7 @@ def loginview (request):
         form_login = AuthenticationForm(request, data=request.POST) 
         if form_login.is_valid(): 
             data=form_login.cleaned_data 
-            usuario=data['username'] 
+            usuario=data['username']
             contrasena=data['password']
             user=authenticate(username=usuario, password=contrasena) 
             if user:
