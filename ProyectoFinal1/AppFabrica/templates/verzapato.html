@@ -1,0 +1,26 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+{% block contenidoDinamico%}
+<!-- Masthead-->
+<header class="masthead">
+    <div class="container position-relative">
+        <div class="row justify-content-center">
+            <div class="col-xl-20">
+                <div class="text-center text-white">
+                    <!-- Page heading-->
+                    <h1 class="mb-5">Conoce los detalles del zapato {{zapato.nombre}}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<img src="{{zapato.foto.url}}" alt="foto_producto"> 
+<h3> Nombre: {{zapato.nombre}} - Material: {{zapato.material}} - Color: {{zapato.color}} - Talle: {{zapato.talle}} - Stock: {{zapato.stock}} - Precio: {{zapato.precio}}</h3>
+     <div>
+        <button>
+            <a href= "{% url 'lista_zapatos'%}"> Ver todos los zapatos </a>
+        </button>
+    </div>
+</p>     
+{% endblock contenidoDinamico%}

@@ -9,23 +9,25 @@
             <div class="col-xl-20">
                 <div class="text-center text-white">
                     <!-- Page heading-->
-                    <h1 class="mb-5">Listado de clientes mayoristas</h1>
+                    <h1 class="mb-5">Bienvenidos a nuestro catálogo</h1>
                 </div>
             </div>
         </div>
     </div>
 </header>
 <p> 
-    {% for zapato in zapatos%}
+    {% for zapato in zapatos %}
     {% if user.is_authenticated %}
     <li> 
         <img src="{{zapato.foto.url}}" alt="foto_producto"> 
          Nombre: {{zapato.nombre}} - Material: {{zapato.material}} - Color: {{zapato.color}} - Talle: {{zapato.talle}} - Stock: {{zapato.stock}} - Precio: {{zapato.precio}} 
     </li>
     <div>
+        {% if user.is_authenticated and user.is_staff  %}
         <form action="{% url 'eliminar_zapato' zapato.id %}" method="POST"> {% csrf_token %}
             <button type="submit"> Eliminar </button>
         </form>
+        {% endif %}
         <button>
             <a href= "{% url 'editar_zapato' zapato.id %}"> Editar</a>
         </button>
@@ -33,11 +35,12 @@
     {% else %}
     <li> 
         Nombre: {{zapato.nombre}} - Precio: {{zapato.precio}} 
+        <img src="{{url}}" alt="foto_producto"> 
     </li>
     <div>
-        <form action="{% url 'ver_zapato' zapato.id%}" method="POST"> {% csrf_token %}
-            <button type="submit"> Ver más </button>
-        </form>
+        <button>
+            <a href= "{% url 'detallezapato' zapato.id %}"> Ver más</a>
+        </button>
     </div>
     {% endif %}
     {% endfor %}

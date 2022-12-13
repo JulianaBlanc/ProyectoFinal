@@ -1,7 +1,7 @@
 from multiprocessing.spawn import import_main_path
 from django.contrib import admin
 from AppFabrica import views
-from .views import buscar, buscar_zapato, editar_usuario, loginview, registrar, lista_zapatos, editar_zapato, eliminar_zapato, crear_zapato, crear_empleado, form_mayorista, inicio, suscriptores
+from .views import buscar, buscar_zapato,detalle_zapato, editar_usuario, loginview, registrar, lista_zapatos, editar_zapato, eliminar_zapato, crear_zapato, crear_empleado, form_mayorista, inicio, suscriptores
 from django.urls import path
 from django.contrib.auth.views import LogoutView
 
@@ -21,6 +21,6 @@ urlpatterns = [
     path ('registrar/', registrar, name= "registrar"),
     path ('logout/', LogoutView.as_view(template_name="logout.html"), name= "logout"),
     path ('editarusuario/', editar_usuario, name= "editar_usuario"),
-    path ('verzapato/<id>', lista_zapatos, name= "ver_zapato"),
+    path ('detallezapato/<pk>', detalle_zapato.as_view(), name= "detallezapato"),
 ]
 

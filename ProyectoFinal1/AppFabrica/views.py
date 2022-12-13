@@ -7,6 +7,8 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import FormProspecto, MayoristaFormulario, ZapatoFormulario, UserRegisterForm, UserEditForm
 from .models import Empleado, Mayorista, Prospecto, Zapato, Avatar
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
+from django.views.generic.detail import DetailView
 
 # Create your views here.
 def inicio (request):
@@ -17,12 +19,10 @@ def inicio (request):
         return render(request, "inicio.html")
 
 
-
 def crear_zapato (request):
     if request.method == 'POST':
-        form_zapato = ZapatoFormulario(request.POST)
+        form_zapato = ZapatoFormulario(request.POST, files=request.FILES)
         if form_zapato.is_valid():
-            print('error1')
             data=form_zapato.cleaned_data
             zapato = Zapato (
                 nombre=data['nombre'], 
@@ -33,7 +33,6 @@ def crear_zapato (request):
                 precio=data['precio'],
                 foto=data['foto']
             )
-            print('error1')
             zapato.save()
             return HttpResponseRedirect ('/AppFabrica/zapatos')
     else:
@@ -43,6 +42,11 @@ def crear_zapato (request):
 def lista_zapatos (request):
     zapatos = Zapato.objects.all()
     return render (request, "listazapatos.html", {"zapatos": zapatos})
+
+class detalle_zapato (DetailView):
+    model = Zapato
+    template_name = 'verzapato.html'
+    context_object_name = "zapato"
 
 def eliminar_zapato (request, id):
     if request.method == 'POST':
@@ -136,12 +140,13 @@ def loginview (request):
             usuario=data['username'] 
             contrasena=data['password']
             user=authenticate(username=usuario, password=contrasena) 
-            if user: 
+            if user:
                 login(request, user) 
-                return render (request, "inicio.html", {'mensaje': f'Bienvenido {usuario}'}) 
+                avatar = Avatar.objects.get(user=request.user)
+                return render (request, "inicio.html", {'mensaje': f'Bienvenido {usuario}', 'url': avatar.imagen.url}) 
             else: 
                 return render (request, "inicio.html", {'mensaje': f'Error en los datos'}) 
-        return render (request, "inicio.html", {'mensaje': f'Usuario'})
+        return render (request, "inicio.html", {'mensaje': f'Usuario incorrecto'})
     else: 
         form_login = AuthenticationForm() 
         return render (request, "login.html", {'form_login': form_login})
