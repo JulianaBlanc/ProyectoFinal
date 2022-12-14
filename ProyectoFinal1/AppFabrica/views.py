@@ -12,6 +12,7 @@ from django.views.generic.detail import DetailView
 
 # Create your views here.
 def inicio (request):
+    usuario = request.user.username
     try:
         avatar = Avatar.objects.get(user=request.user)
         return render(request, "inicio.html", {'url': avatar.imagen.url})
@@ -146,7 +147,7 @@ def loginview (request):
             if user:
                 login(request, user) 
                 avatar = Avatar.objects.get(user=request.user)
-                return render (request, "inicio.html", {'mensaje': f'Bienvenido {usuario}', 'url': avatar.imagen.url}) 
+                return render (request, "inicio.html", {'mensaje': f'Bienvenid@ {usuario}', 'url': avatar.imagen.url}) 
             else: 
                 return render (request, "inicio.html", {'mensaje': f'Error en los datos'}) 
         return render (request, "inicio.html", {'mensaje': f'Usuario incorrecto'})
@@ -163,8 +164,9 @@ def registrar(request):
             registro_usuario.save()
             return render (request, "inicio.html", {'mensaje': f'Usuario {username} creado con éxito'}) 
         else:
+            print("error: ", registro_usuario.errors)
             registro_usuario= UserRegisterForm()
-            return render (request, "inicio.html", {'mensaje': f'Error al crear usuario: {registro_usuario.errors}'}) 
+            return render (request, "inicio.html", {'mensaje': f'Error al crear usuario, intente nuevamente'}) 
     else:
         registro_usuario= UserRegisterForm()
         return render (request, "registro.html", {'registro_usuario': registro_usuario}) 

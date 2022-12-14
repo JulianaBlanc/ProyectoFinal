@@ -26,7 +26,8 @@
                 {% if user.is_authenticated %}
                     {% if user.is_authenticated and user.is_staff  %}
                 <a class="btn btn-primary" href= "{% url 'crearzapato' %}" >Crear Calzado</a>
-                    {% endif %}
+                <a class="btn btn-primary" href= "{% url 'registrar' %}" >Crear usuario</a>
+                {% endif %}
                 <p> Bienvenid@ {{user.username}} </p>
                 <a href= "{% url 'editar_usuario' %}" >Editar Usuario</a>
                 <a class="btn btn-primary" href= "{% url 'logout' %}" >Logout</a>
