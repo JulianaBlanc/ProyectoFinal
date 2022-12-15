@@ -15,7 +15,7 @@ class Zapato (models.Model):
     foto = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def __str__(self):
-        return f' {self.nombre} - {self.material} - {self.color} - {self.talle} - {self.stock} - {self.precio}'
+        return f' {self.nombre} - {self.material} - {self.color} - {self.talle} - {self.stock} - {self.precio} - {self.foto}'
 
 
 class Empleado (models.Model):

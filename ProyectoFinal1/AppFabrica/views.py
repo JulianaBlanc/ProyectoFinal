@@ -7,20 +7,24 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import FormProspecto, MayoristaFormulario, ZapatoFormulario, UserRegisterForm, UserEditForm
 from .models import Empleado, Mayorista, Prospecto, Zapato, Avatar
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
+from django.views.generic.detail import DetailView
 
 # Create your views here.
 def inicio (request):
+    usuario = request.user.username
     try:
         avatar = Avatar.objects.get(user=request.user)
         return render(request, "inicio.html", {'url': avatar.imagen.url})
     except:
         return render(request, "inicio.html")
 
-
+def sobre_mi (request):
+    return render(request, "sobre_mi.html")
 
 def crear_zapato (request):
     if request.method == 'POST':
-        form_zapato = ZapatoFormulario(request.POST)
+        form_zapato = ZapatoFormulario(request.POST, files=request.FILES)
         if form_zapato.is_valid():
             print('error1')
             data=form_zapato.cleaned_data
@@ -44,6 +48,11 @@ def lista_zapatos (request):
     zapatos = Zapato.objects.all()
     return render (request, "listazapatos.html", {"zapatos": zapatos})
 
+class detalle_zapato (DetailView):
+    model = Zapato
+    template_name = 'verzapato.html'
+    context_object_name = "zapato"
+
 def eliminar_zapato (request, id):
     if request.method == 'POST':
         zapato = Zapato.objects.get(id=id)
@@ -55,7 +64,6 @@ def editar_zapato (request, id):
     zapato = Zapato.objects.get(id=id)
     if request.method == 'POST':
         form_zapato = ZapatoFormulario(request.POST, files=request.FILES)
-        print('hola1')
         if form_zapato.is_valid():
             data=form_zapato.cleaned_data
             zapato.nombre=data['nombre']
@@ -64,7 +72,9 @@ def editar_zapato (request, id):
             zapato.talle=data['talle']
             zapato.stock=data['stock']
             zapato.precio=data['precio']
-            zapato.foto=data['foto']
+            if data['foto'] is not None:
+                zapato.foto=data['foto']
+            print("data['foto'] ", data['foto'])
             zapato.save()
         print(form_zapato.errors)
         return HttpResponseRedirect('/AppFabrica/zapatos')
@@ -133,15 +143,16 @@ def loginview (request):
         form_login = AuthenticationForm(request, data=request.POST) 
         if form_login.is_valid(): 
             data=form_login.cleaned_data 
-            usuario=data['username'] 
+            usuario=data['username']
             contrasena=data['password']
             user=authenticate(username=usuario, password=contrasena) 
-            if user: 
+            if user:
                 login(request, user) 
-                return render (request, "inicio.html", {'mensaje': f'Bienvenido {usuario}'}) 
+                avatar = Avatar.objects.get(user=request.user)
+                return render (request, "inicio.html", {'mensaje': f'Bienvenid@ {usuario}','url': avatar.imagen.url}) 
             else: 
                 return render (request, "inicio.html", {'mensaje': f'Error en los datos'}) 
-        return render (request, "inicio.html", {'mensaje': f'Usuario'})
+        return render (request, "inicio.html", {'mensaje': f'Usuario incorrecto'})
     else: 
         form_login = AuthenticationForm() 
         return render (request, "login.html", {'form_login': form_login})
@@ -153,15 +164,17 @@ def registrar(request):
         if registro_usuario.is_valid():
             username=registro_usuario.cleaned_data['username']
             registro_usuario.save()
-            return render (request, "inicio.html", {'mensaje': f'Usuario {username} creado con éxito'}) 
+            return render (request, "inicio.html", ({'mensaje': f'Usuario {username} creado con éxito'}))
         else:
+            print("error: ", registro_usuario.errors)
             registro_usuario= UserRegisterForm()
-            return render (request, "inicio.html", {'mensaje': f'Error al crear usuario: {registro_usuario.errors}'}) 
+            return render (request, "inicio.html", {'mensaje': f'Error al crear usuario, intente nuevamente'}) 
     else:
         registro_usuario= UserRegisterForm()
         return render (request, "registro.html", {'registro_usuario': registro_usuario}) 
 
 def editar_usuario(request):
+    avatar = Avatar.objects.get(user=request.user)
     usuario= request.user
     if request.method == "POST":
         form_editar_usuario=UserEditForm(request.POST)

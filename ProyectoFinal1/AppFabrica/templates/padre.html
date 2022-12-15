@@ -23,15 +23,18 @@
             <div class="container">
                 <a class="navbar-brand" href= "{% url 'inicio' %}">Fábrica de calzado</a>
                 <a class="btn btn-primary" href= "{% url 'lista_zapatos' %}" >Catálogo</a>
-                <a class="btn btn-primary" href="{% url 'suscriptores' %}">Suscribirse</a>
-                <a class="btn btn-primary" href= "{% url 'crearzapato' %}" >Crear Calzado</a>
-                <a class="btn btn-primary" href= "{% url 'form_mayorista' %}" >Compra Mayorista</a>
                 {% if user.is_authenticated %}
-                    <p> Bienvenid@ {{user.username}} </p>
-                    <a href= "{% url 'editar_usuario' %}" >Editar Usuario</a>
-                    <a class="btn btn-primary" href= "{% url 'logout' %}" >Logout</a>
+                    {% if user.is_authenticated and user.is_staff  %}
+                <a class="btn btn-primary" href= "{% url 'crearzapato' %}" >Crear Calzado</a>
+                <a class="btn btn-primary" href= "{% url 'registrar' %}" >Crear usuario</a>
+                {% endif %}
+                <p> Bienvenid@ {{user.username}} </p>
+                <a href= "{% url 'editar_usuario' %}" >Editar Usuario</a>
+                <a class="btn btn-primary" href= "{% url 'logout' %}" >Logout</a>
                 {% else %}
-                    <a class="btn btn-primary" href= "{% url 'login' %}" >Login</a>
+                <a class="btn btn-primary" href="{% url 'suscriptores' %}">Suscribirse</a>
+                <a class="btn btn-primary" href= "{% url 'form_mayorista' %}" >Compra Mayorista</a>
+                <a class="btn btn-primary" href= "{% url 'login' %}" >Login</a>
                 {% endif %}
             </div>
         </nav>
@@ -40,6 +43,34 @@
 
         {% endblock contenidoDinamico%}
 
+        <!-- Footer-->
+        <footer class="footer bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+                        <ul class="list-inline mb-2">
+                            <li class="list-inline-item"><a href="{% url 'sobremi' %}">Sobre mí</a></li>
+                            <li class="list-inline-item">⋅</li>
+                            <li class="list-inline-item"><a href="{% url 'form_mayorista' %}">Contacto</a></li>
+                            <li class="list-inline-item">⋅</li>
+                        </ul>
+                        <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2022. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item me-4">
+                                <a href="#!"><i class="bi-facebook fs-3"></i></a>
+                            </li>
+                            <li class="list-inline-item me-4">
+                                <a href="#!"><i class="bi-twitter fs-3"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!"><i class="bi-instagram fs-3"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

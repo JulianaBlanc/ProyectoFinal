@@ -16,9 +16,7 @@
     </div>
 </header>
 <h3> {{mensaje}} </h3>
-{% if user.is_authenticated %}
-<img src="{{url}}" alt="avatar">
-{% endif %}
+<a href= "{% url 'login'%}"> Intentar nuevamente </a>
 {% endblock contenidoDinamico%}
 
 
