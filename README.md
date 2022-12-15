@@ -10,7 +10,9 @@ Esta Aplicacion Web, es un proyecto inicial de una plataforma para una fabrica d
 
 
 La aplicacion esta proyectada para tres tipos de usuarios:
+
 > VISITANTES : Podran visualizar el catalogo completo y una vista mas detallada del calzado que les interese. Además, podran dejar sus datos para luego ser contactados en caso de estar interesados en compras mayoristas.
+
 > EDITORES : Solo podran editar la informacion del calzado, como stock o precio.
     - Usuario: julianablanc
     - Contraseña: argentina2021
