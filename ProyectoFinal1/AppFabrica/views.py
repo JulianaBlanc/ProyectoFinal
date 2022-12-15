@@ -147,7 +147,7 @@ def loginview (request):
             if user:
                 login(request, user) 
                 avatar = Avatar.objects.get(user=request.user)
-                return render (request, "inicio.html", {'mensaje': f'Bienvenid@ {usuario}', 'url': avatar.imagen.url}) 
+                return render (request, "inicio.html", {'mensaje': f'Bienvenid@ {usuario}','url': avatar.imagen.url}) 
             else: 
                 return render (request, "inicio.html", {'mensaje': f'Error en los datos'}) 
         return render (request, "inicio.html", {'mensaje': f'Usuario incorrecto'})
@@ -162,16 +162,17 @@ def registrar(request):
         if registro_usuario.is_valid():
             username=registro_usuario.cleaned_data['username']
             registro_usuario.save()
-            return render (request, "inicio.html", {'mensaje': f'Usuario {username} creado con éxito'}) 
+            return render (request, "inicio.html", ({'mensaje': f'Usuario {username} creado con éxito'}))
         else:
             print("error: ", registro_usuario.errors)
             registro_usuario= UserRegisterForm()
-            return render (request, "inicio.html", {'mensaje': f'Error al crear usuario, intente nuevamente'}) 
+            return render (request, "inicio.html", {'mensaje': f'Error al crear usuario, intente nuevamente','url': avatar.imagen.url}) 
     else:
         registro_usuario= UserRegisterForm()
         return render (request, "registro.html", {'registro_usuario': registro_usuario}) 
 
 def editar_usuario(request):
+    avatar = Avatar.objects.get(user=request.user)
     usuario= request.user
     if request.method == "POST":
         form_editar_usuario=UserEditForm(request.POST)
@@ -181,8 +182,8 @@ def editar_usuario(request):
             usuario.last_name=data['last_name']
             usuario.email=data['email']
             usuario.save()
-            return render (request, "inicio.html", {'mensaje': f'Datos actualizados!'}) 
-        return render (request, "inicio.html", {'mensaje': f'Las contraseñas no coinciden!'})  
+            return render (request, "inicio.html", {'mensaje': f'Datos actualizados!','url': avatar.imagen.url}) 
+        return render (request, "inicio.html", {'mensaje': f'Las contraseñas no coinciden!','url': avatar.imagen.url})  
     else:
         form_editar_usuario = UserEditForm(instance=request.user)
         return render (request, "editarusuario.html", {"form_editar_usuario": form_editar_usuario})
