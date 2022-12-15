@@ -23,5 +23,6 @@ urlpatterns = [
     path ('editarusuario/', editar_usuario, name= "editar_usuario"),
     path ('detallezapato/<pk>', detalle_zapato.as_view(), name= "detallezapato"),
     path ('sobremi', sobre_mi, name= "sobremi"),
+    path ('verzapato/<id>', lista_zapatos, name= "ver_zapato"),
 ]
 

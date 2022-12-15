@@ -22,11 +22,11 @@ def inicio (request):
 def sobre_mi (request):
     return render(request, "sobre_mi.html")
 
-
 def crear_zapato (request):
     if request.method == 'POST':
         form_zapato = ZapatoFormulario(request.POST, files=request.FILES)
         if form_zapato.is_valid():
+            print('error1')
             data=form_zapato.cleaned_data
             zapato = Zapato (
                 nombre=data['nombre'], 
@@ -37,6 +37,7 @@ def crear_zapato (request):
                 precio=data['precio'],
                 foto=data['foto']
             )
+            print('error1')
             zapato.save()
             return HttpResponseRedirect ('/AppFabrica/zapatos')
     else:
@@ -75,6 +76,7 @@ def editar_zapato (request, id):
                 zapato.foto=data['foto']
             print("data['foto'] ", data['foto'])
             zapato.save()
+        print(form_zapato.errors)
         return HttpResponseRedirect('/AppFabrica/zapatos')
     else:
         form_zapato = ZapatoFormulario (initial={
