@@ -166,7 +166,7 @@ def registrar(request):
         else:
             print("error: ", registro_usuario.errors)
             registro_usuario= UserRegisterForm()
-            return render (request, "inicio.html", {'mensaje': f'Error al crear usuario, intente nuevamente','url': avatar.imagen.url}) 
+            return render (request, "inicio.html", {'mensaje': f'Error al crear usuario, intente nuevamente'}) 
     else:
         registro_usuario= UserRegisterForm()
         return render (request, "registro.html", {'registro_usuario': registro_usuario}) 

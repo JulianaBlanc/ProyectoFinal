@@ -6,7 +6,7 @@ Esta Aplicacion Web, es un proyecto inicial de una plataforma para una fabrica d
 >Instalaciones y dependencias para el funcionamiento del proyecto:
 <!-- .- python -- versión 3.10.6 .- pip install django --versión 4.1.2 .- pip install pillow -->
 > Casos de Prueba : https://docs.google.com/document/d/1sfbW5fvT-bzk-ZXIiDhPqiDR8ZuaQ1wiZ_Fv5nUQuxo/edit?usp=sharing
-> Video del proyecto: 
+> Video del proyecto: https://vimeo.com/781477064/ac74a40ad3
 
 
 La aplicacion esta proyectada para tres tipos de usuarios:
@@ -16,6 +16,7 @@ La aplicacion esta proyectada para tres tipos de usuarios:
 > EDITORES : Solo podran editar la informacion del calzado, como stock o precio.
     - Usuario: julianablanc
     - Contraseña: argentina2021
+
 > STAFF: Serán los unicos habilitados para crear o eliminar un nuevo modelo de zapato, además de editar los ya exitsentes.
     - Usuario: matias
     - Contraseña: argentina2022
