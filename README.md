@@ -4,9 +4,9 @@ Proyecto Final. Comisión 34630.
 Esta Aplicacion Web, es un proyecto inicial de una plataforma para una fabrica de zapatos. El objetivo será presentar un catálogo de los productos que se fabrican, con sus precios y brindará la posibilidad a los clientes mayoristas o minoristas de dejar sus datos para que luego sean contactados.
 
 >Instalaciones y dependencias para el funcionamiento del proyecto:
-<!-- .- python -- versión 3.10.6 .- pip install django --versión 4.1.2 .- pip install pillow -->
+.- python -- versión 3.10.6 .- pip install django --versión 4.1.2 .- pip install pillow
 > Casos de Prueba : https://docs.google.com/document/d/1sfbW5fvT-bzk-ZXIiDhPqiDR8ZuaQ1wiZ_Fv5nUQuxo/edit?usp=sharing
-> Video del proyecto: https://vimeo.com/781477064/ac74a40ad3
+> Video del proyecto: https://vimeo.com/781477064/ac74a40ad3 
 
 
 La aplicacion esta proyectada para tres tipos de usuarios:
