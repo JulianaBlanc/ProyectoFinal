@@ -14,9 +14,9 @@ La aplicacion esta proyectada para tres tipos de usuarios:
 > VISITANTES : Podran visualizar el catalogo completo y una vista mas detallada del calzado que les interese. Además, podran dejar sus datos para luego ser contactados en caso de estar interesados en compras mayoristas.
 
 > EDITORES : Solo podran editar la informacion del calzado, como stock o precio.
-    - Usuario: julianablanc
-    - Contraseña: argentina2021
+- Usuario: julianablanc
+- Contraseña: argentina2021
 
 > STAFF: Serán los unicos habilitados para crear o eliminar un nuevo modelo de zapato, además de editar los ya exitsentes.
-    - Usuario: matias
-    - Contraseña: argentina2022
+- Usuario: matias
+- Contraseña: argentina2022
