@@ -182,8 +182,8 @@ def editar_usuario(request):
             usuario.last_name=data['last_name']
             usuario.email=data['email']
             usuario.save()
-            return render (request, "inicio.html", {'mensaje': f'Datos actualizados!','url': avatar.imagen.url}) 
-        return render (request, "inicio.html", {'mensaje': f'Las contraseñas no coinciden!','url': avatar.imagen.url})  
+            return render (request, "inicio.html", {'mensaje': f'Datos actualizados!'}) 
+        return render (request, "inicio.html", {'mensaje': f'Las contraseñas no coinciden!'})  
     else:
         form_editar_usuario = UserEditForm(instance=request.user)
         return render (request, "editarusuario.html", {"form_editar_usuario": form_editar_usuario})

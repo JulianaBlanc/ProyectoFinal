@@ -20,6 +20,3 @@ La aplicacion esta proyectada para tres tipos de usuarios:
 > STAFF: Serán los unicos habilitados para crear o eliminar un nuevo modelo de zapato, además de editar los ya exitsentes.
     - Usuario: matias
     - Contraseña: argentina2022
-
-
-Inicio: http://127.0.0.1:8000/AppFabrica/
